@@ -1,0 +1,8 @@
+/.idea
+/sf-spider.iml
+/sf-crawler/sf-crawler.iml
+/sf-crawler-web/sf-crawler-web.iml
+/sf-crawler/target
+/sf-crawler-web/target
+/log
+/sf-crawler-web/lib

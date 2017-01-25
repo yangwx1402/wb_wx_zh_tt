@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spider>
+    <!--爬虫系统用到的properties参数,配置在这里就可以使用SpiderConfig的getProperty获取-->
+    <properties>
+        <!--微博数据存储 用户表表名-->
+        <property name="sns_weibo_sina_person_chunwan_table">sns_weibo_sina_person</property>
+        <!--微博数据存储 微博数据表名-->
+        <property name="sns_weibo_sina_timeline_chunwan_table">sns_weibo_sina_posts</property>
+        <!--微博数据存储 微博评论表名-->
+        <property name="sns_weibo_sina_comment_chunwan_table">sns_weibo_sina_comment</property>
+        <!--微博数据存储 微博评论转发趋势表名-->
+        <property name="sns_weibo_sina_chunwan_trace_table">sns_weibo_sina_trace</property>
+        <!--微博关键词队列名称-->
+        <property name="KEY_WORD_QUEUE_NAME">KEY_WORD_QUEUE_NAME</property>
+        <!--微博topic关键词队列名称-->
+        <property name="TOPIC_KEY_WORD_QUEUE_NAME">TOPIC_KEY_WORD_QUEUE_NAME</property>
+        <!--微信关键词队列名称-->
+        <property name="WEIXIN_XIN_KEY_WORD_QUEUE_NAME">WEIXIN_XIN_KEY_WORD_QUEUE_NAME</property>
+        <!--知乎关键词队列名称-->
+        <property name="ZHIHU_KEY_WORD_QUEUE_NAME">ZHIHU_KEY_WORD_QUEUE_NAME</property>
+        <!--微博评论种子队列名称-->
+        <property name="WEIBO_COMMENT_QUEUE_NAME">WEIBO_COMMENT_QUEUE_NAME</property>
+        <!--微博官方微博队列名称-->
+        <property name="WEIBO_OFFICIAL_QUQUE_NAME">WEIBO_OFFICIAL_QUQUE_NAME</property>
+        <!--微信网页抓取队列名称-->
+        <property name="WEIXIN_PAGE_COMMENT_QUEUE_NAME">WEIXIN_PAGE_COMMENT_QUEUE_NAME</property>
+        <!--知乎问题页抓取队列名称-->
+        <property name="ZHIHU_QUESTION_QUEUE_NAME">ZHIHU_QUESTION_QUEUE_NAME</property>
+        <!--老微博登录url-->
+        <!--<property name="SINA_WEIBO_LOGIN_URL">http://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.5)
+        </property> -->
+        <property name="SINA_WEIBO_LOGIN_URL">https://login.sina.com.cn/signup/signin.php</property>
+        <!---->
+        <property name="SINA_WEIBO_LOGIN_USERNAME_ID">username</property>
+        <!---->
+        <property name="SINA_WEIBO_LOGIN_PASSWORD_ID">password</property>
+        <!--老登陆信息-->
+        <!--<property name="SINA_WEIBO_LOGIN_BUTTON_XPATH">.//*[@id='vForm']/div[3]/ul/li[6]/div[2]/input</property> -->
+        <property name="SINA_WEIBO_LOGIN_BUTTON_XPATH">.//*[@id='vForm']/div[2]/div[1]/ul/li[7]/div[1]/input</property>
+        <!--user-agent-->
+        <property name="CRAWLER_USER_AGENT">Mozilla/5.0 (X11; U; Linux i686; zh-CN; rv:1.9.1.2) Gecko/20090803 Fedora/3.5.2-2.fc11 Firefox/3.5.2</property>
+        <!--抓取停留基础时间值-->
+        <property name="SINA_WEIBO_SLEEP_TIME_BASE">60000</property>
+        <!--抓取停留随机间隔-->
+        <property name="SINA_WEIBO_SLEEP_TIME_INTERVAL_LIMIT">10</property>
+        <!--微博搜索url-->
+        <property name="SINA_WEIBO_SEARCH_URL">http://s.weibo.com/weibo/</property>
+        <!---->
+        <property name="SINA_WEIBO_SEARCH_URL_SUBFFIX">&amp;typeall=1&amp;suball=1&amp;Refer=g</property>
+        <!--微博搜索按时间搜索时间间隔,单位为小时-->
+        <property name="SINA_WEIBO_SEARCH_TIME_INTERVAL_HOUR">4</property>
+
+        <!--微博搜索最大页数-->
+        <property name="SINA_WEIBO_SEARCH_MAX_PAGE">10</property>
+        <!--微博用户api url-->
+        <property name="SINA_WEIBO_USER_API_URL">https://api.weibo.com/2/users/show.json</property>
+        <!---->
+        <property name="SINA_WEIBO_SEARCH_READY_FETCH_COMMENT">0</property>
+        <!---->
+        <property name="SINA_WEIBO_SEARCH_FETCHED_COMMENT">1</property>
+        <!--微博评论url-->
+        <property name="SINA_WEIBO_COMMET_API_URL">https://api.weibo.com/2/comments/show.json</property>
+        <!--微博评论每页抓取限制值-->
+        <property name="SINA_WEIBO_COMMENT_LIMIT_NUM">100</property>
+        <!--微博topic搜索url-->
+        <property name="SINA_WEIBO_TOPIC_API_URL">https://api.weibo.com/2/search/topics.json</property>
+        <!--微博评论转发跟踪url-->
+        <property name="SINA_WEIBO_TRACE_API_URL">https://api.weibo.com/2/statuses/count.json</property>
+        <!--微博趋势跟踪时间间隔-->
+        <property name="SINA_WEIBO_TRACE_INTERVAL">86400000</property>
+        <!--微信评论抓取阈值,评论数超过该值就进行评论抓取-->
+        <property name="SINA_WEIBO_COMMENT_FETCHER_THRESHOLD">50</property>
+        <!--微信搜索url-->
+        <property name="WEIXIN_SEARCH_URL">http://weixin.sogou.com/weixin?type=2&amp;ie=utf8&amp;tsn=1&amp;ft=&amp;et=&amp;interation=null&amp;wxid=&amp;usip=null&amp;from=tool</property>
+        <!--微信评论获取url-->
+        <property name="WEIXIN_COMMENT_URL">http://mp.weixin.qq.com/mp/getcomment?</property>
+        <!--微信搜索翻页数-->
+        <property name="WEIXIN_SEARCH_PAGE_LIMIT">10</property>
+        <!--知乎搜索url-->
+        <property name="ZHIHU_SEARCH_URL">http://zhihu.sogou.com/zhihu?ie=utf8</property>
+        <!--知乎搜索页码限制-->
+        <property name="ZHIHU_SEARCH_PAGE_LIMIT">20</property>
+        <!--百度贴吧页码限制-->
+        <property name="BAIDU_POST_PAGE_LIMIT">10</property>
+        <!--舆情信息存储表-->
+        <property name="WEIXIN_ZHIHU_BAIDU_MONGO_ARTICLE_COLLECTION">beidou_yuqing_data</property>
+        <!---->
+        <property name="WEIXIN_ZHIHU_BAIDU_MONGO_COMMENT_COLLECTION">beidou_yuqing_data_relpy</property>
+        <!---->
+        <property name="WEIXIN_ZHIHU_BAIDU_MONGO_MDATA_COLLECTION">beidou_yuqing_mdata</property>
+
+        <property name="TOUTIAO_ARTICLE_MONGO_COLLECTION_NAME">beidou_yuqing_toutiao</property>
+
+        <property name="TOUTIAO_ARTICLE_COMMENT_MONGO_COLLECTION_NAME">beidou_yuqing_toutiao_comment</property>
+
+        <property name="TOUTIAO_ARTICLE_REMOVE_JSON_FIELDS">highlight,middle_image,image_list,image_detail</property>
+
+        <property name="TOUTIAO_KEYWORD_SEARCH_URL">http://www.toutiao.com/search_content/?format=json&amp;autoload=true&amp;cur_tab=1</property>
+
+        <property name="TOUTIAO_KEYWORD_SEARCH_PAGE_SIZE">20</property>
+
+        <property name="TOUTIAO_KEYWORD_SEARCH_LIMIT_PAGE_COUNT">10</property>
+
+        <property name="TOUTIAO_KEYWORD_SEARCH_QUEUE_NAME">TOUTIAO_KEYWORD_SEARCH_QUEUE_NAME</property>
+
+        <property name="TOUTIAO_COMMENT_QUEUE_NAME">TOUTIAO_COMMENT_QUEUE_NAME</property>
+
+        <property name="TOUTIAO_PAGE_COMMENT_URL">http://www.toutiao.com/api/comment/list/</property>
+
+        <property name="TOUTIAO_PAGE_COMMENT_SIZE_LIMIT">200</property>
+
+        <property name="TOUTIAO_PAGE_COMMENT_REMOVE_JSON_FIELDS"></property>
+
+        <!--知乎答案评论url-->
+        <property name="ZHIHU_ANSWER_COMMENT_URL">https://www.zhihu.com/r/answers/</property>
+        <!--知乎问题评论url-->
+        <property name="ZHIHU_QUESTION_COMMENT_URL">https://www.zhihu.com/node/QuestionCommentBoxV2</property>
+
+        <property name="WEIBO_MOIVE_CATALOG_MONGO_COLLECTION">beidou_crawler_catalog</property>
+        <!--优先爬取的beidou id,多个用,分割 跟该配置相关的beidou_id将防止到high队列中优先爬取-->
+        <property name="SPIDER_CRAWLER_PRIORITY_BEIDOU">291701001</property>
+        <!--pool连接池模式,random随机模式,其他为默认模式default-->
+        <property name="SPIDER_HTTP_TOOL_GROUP_SELECT_RULE">redis</property>
+    </properties>
+    <!--消息队列配置,poolSize为消息队列的大小限制-->
+    <messagePool poolSize="1000">
+        <classname>com.letv.sf.mq.PriorityRedisMessageQueue</classname>
+    </messagePool>
+    <!--redis配置信息-->
+    <redisConfig ip="10.183.222.210" port="9008" auth="sinx/cosx=tanx" max="100" min="20" />
+    <!--线程池配置-->
+    <executors core="40" max="40" idleminutes="10">
+        <!--微博评论爬取线程-->
+        <thread name="weibo_comment_crawler" count="5" use="true">com.letv.sf.job.thread.weibo.CommentCralwerThread</thread>
+        <!--官方微博账号信息抓取,会抓取该账号最近得一条微博-->
+        <thread name="weibo_official_crawler" count="3" use="true">com.letv.sf.job.thread.weibo.OfficialWeiboCrawlerThread</thread>
+        <!--微博关键词搜索爬取线程,通过关键词搜索抓取微博内容-->
+        <thread name="weibo_keyword_search_crawler" count="10" use="true">com.letv.sf.job.thread.weibo.KeywordSearchThread</thread>
+        <!--微信关键词搜索爬取线程,通过关键词通过sogou对微信内容进行搜索抓取-->
+        <thread name="weixin_keyword_search_crawler" count="4" use="true">com.letv.sf.job.thread.weixin.WeixinSearchCrawlerThread</thread>
+        <!--微信内容页抓取线程，通过搜索到的url进行内容页的爬取,因为url是临时链接有可能失效，要注意-->
+        <thread name="weixin_page_crawler" count="4" use="true">com.letv.sf.job.thread.weixin.WeixinPageCrawlerThread</thread>
+        <!--知乎问题页爬取线程-->
+        <thread name="zhihu_question_crawler" count="2" use="true">com.letv.sf.job.thread.zhihu.ZhihuQuestionPageCrawlerThread</thread>
+        <!--头条关键词搜索-->
+        <thread name="toutiao_search_crawler" count="2" use="true">com.letv.sf.job.thread.toutiao.ToutiaoKeywordSearchThread</thread>
+        <!--头条评论爬取-->
+        <thread name="toutiao_page_comment_crawler" count="5" use="true">com.letv.sf.job.thread.toutiao.ToutiaoPageCommentThread</thread>
+    </executors>
+    <!--定时任务配置-->
+    <jobs>
+        <!--官方微博账号pub任务，将mongo catalog表中的相关信息的官微通过该任务pub到队列中等待抓取-->
+        <job use="true" name="sf_cralwer_official_seed_pub" group="sf_cralwer_official_seed_pub"
+             classname="com.letv.sf.job.weibo.OfficialWeiboSeedPushJob">
+            <trigger group="sf_cralwer_official_seed_pub" name="sf_cralwer_official_seed_pub" cron="0 0 * * * ?"/>
+        </job>
+        <!--微博、微信、知乎等等关键词抓取pub任务，将关键词pub到相应的消息队列中等待爬取-->
+        <job use="true" name="sf_crawler_pub_keyword" group="sf_crawler_pub_keyword"
+             classname="com.letv.sf.job.beidou.ChunwanSearchWordPubJob">
+            <trigger group="sf_crawler_pub_keyword" name="sf_crawler_pub_keyword" cron="0 0 * * * ?"/>
+            <params>
+                <param name="region" value="400,100,82,81,71,65,64,63,62,61,54,53,52,51,50,46,45,44,43,42,41,37,36,35,34,33,32,31,23,22,21,15,14,13,12,11"></param>
+            </params>
+        </job>
+        <job use="true" name="sf_crawler_moive_pub_keyword" group="sf_crawler_moive_pub_keyword"
+             classname="com.letv.sf.job.beidou.MoiveSearchWordPubJob">
+            <trigger group="sf_crawler_moive_pub_keyword" name="sf_crawler_moive_pub_keyword" cron="0 0 5,11,17 * * ?"/>
+        </job>
+        <!--微博话题抓取任务-->
+        <job use="true" name="sf_crawler_weibo_topic" group="sf_crawler_weibo_topic"
+             classname="com.letv.sf.job.weibo.WeiboTopicCrawlerJob">
+            <trigger group="sf_crawler_weibo_topic" name="sf_crawler_weibo_topic" cron="0 0/3 * * * ?"/>
+        </job>
+        <!--微博评论转发赞跟踪趋势抓取任务-->
+        <job use="true" name="sf_crawler_weibo_trace" group="sf_crawler_weibo_trace"
+             classname="com.letv.sf.job.weibo.WeiboTraceCrawlerJob">
+            <trigger group="sf_crawler_weibo_trace" name="sf_crawler_weibo_trace" cron="0 5 0/6 * * ?"/>
+        </job>
+        <!--微博评论种子pub任务,将需要抓取评论的微博pub到消息队列中，等待抓取-->
+        <job use="true" name="sf_crawler_weibo_comment_seed" group="sf_crawler_weibo_comment_seed"
+             classname="com.letv.sf.job.weibo.WeiboCommentSeedPubJob">
+            <trigger group="sf_crawler_weibo_comment_seed" name="sf_crawler_weibo_comment_seed" cron="0 0 7,19 * * ?"/>
+        </job>
+        <!--知乎topic抓取任务-->
+        <job use="true" name="sf_crawler_zhihu_topic" group="sf_crawler_zhihu_topic"
+             classname="com.letv.sf.job.zhihu.ZhihuTopicCrawlerJob">
+            <trigger group="sf_crawler_zhihu_topic" name="sf_crawler_zhihu_topic" cron="0 0/5 * * * ?"/>
+            <params>
+                <param name="pages"
+                       value="https://www.zhihu.com/topic/19555437/newest;https://www.zhihu.com/topic/19555437/top-answers;https://www.zhihu.com/topic/19811079/newest;https://www.zhihu.com/topic/19811079/top-answers"/>
+            </params>
+        </job>
+        <!--知乎问题页抓取任务-->
+        <job use="true" name="sf_crawler_zhihu_page" group="sf_crawler_zhihu_page"
+             classname="com.letv.sf.job.zhihu.ZhihuPageCrawlerJob">
+            <trigger group="sf_crawler_zhihu_page" name="sf_crawler_zhihu_page" cron="0 0/3 * * * ?"/>
+        </job>
+
+        <job use="true" name="sf_crawler_zhihu_question_page_seed" group="sf_crawler_zhihu_question_page_seed"
+             classname="com.letv.sf.job.zhihu.ZhihuPageSeedJob">
+            <trigger group="sf_crawler_zhihu_question_page_seed" name="sf_crawler_zhihu_question_page_seed" cron="0 0 0/4 * * ?"/>
+        </job>
+
+        <!--微信内容页种子pub任务-->
+        <job use="true" name="sf_crawler_weixin_page_comment" group="sf_crawler_weixin_page_comment"
+             classname="com.letv.sf.job.weixin.WeixinCommentSeedPubJob">
+            <trigger group="sf_crawler_weixin_page_comment" name="sf_crawler_weixin_page_comment" cron="0 0 2,6,11,15,19,23 * * ?"/>
+        </job>
+        <!--百度贴吧抓取任务-->
+        <job use="true" name="sf_crawler_baidu_post_crawler" group="sf_crawler_baidu_post_crawler"
+             classname="com.letv.sf.job.baidu.BaiduPostCrawlerJob">
+            <trigger group="sf_crawler_baidu_post_crawler" name="sf_crawler_baidu_post_crawler" cron="0 5 * * * ?"/>
+            <params>
+                <param name="pages"
+                       value="http://tieba.baidu.com/f?kw=%E7%9B%B4%E9%80%9A%E6%98%A5%E6%99%9A&amp;ie=utf-8"/>
+            </params>
+        </job>
+        <!--头条评论种子生成任务-->
+        <job use="true" name="sf_crawler_toutiao_page_seed" group="sf_crawler_toutiao_page_seed"
+             classname="com.letv.sf.job.toutiao.ToutiaoCommentSeedPubJob">
+            <trigger group="sf_crawler_toutiao_page_seed" name="sf_crawler_toutiao_page_seed" cron="0 0 7,19 * * ?"/>
+        </job>
+        <!--北斗报告生成任务-->
+        <job use="true" name="sf_crawler_beidou_report" group="sf_crawler_beidou_report"
+             classname="com.letv.sf.job.beidou.BeidouReportJob">
+            <trigger group="sf_crawler_beidou_report" name="sf_crawler_beidou_report" cron="0 5 0 * * ?"/>
+            <params>
+                <param name="email" value="yangyong3@le.com;qingang@le.com;zhangxian@le.com"/>
+            </params>
+        </job>
+        <job use="true" name="sf_crawler_chunwan_topic_report" group="sf_crawler_chunwan_topic_report"
+             classname="com.letv.sf.job.beidou.BeidouChunwanTopicJob">
+            <trigger group="sf_crawler_chunwan_topic_report" name="sf_crawler_chunwan_topic_report" cron="0 5 0 * * ?"/>
+            <params>
+                <param name="email" value="yangyong3@le.com;qingang@le.com;zhangxian@le.com"/>
+            </params>
+        </job>
+    </jobs>
+    <monitors>
+        <monitor></monitor>
+    </monitors>
+</spider>
